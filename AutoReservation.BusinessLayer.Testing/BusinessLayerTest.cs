@@ -1,5 +1,6 @@
 ﻿using AutoReservation.TestEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace AutoReservation.BusinessLayer.Testing
 {
@@ -48,9 +49,9 @@ namespace AutoReservation.BusinessLayer.Testing
         public void Test_GetAuto()
         {
             AutoReservationBusinessComponent arbc = new AutoReservationBusinessComponent();
-            
-            Assert.AreEqual("Fiat Punto", arbc.GetAuto(1).Marke);
-            //Assert.Inconclusive("Test not implemented.");
+            var auto = arbc.GetAutoById(1);
+            Assert.AreEqual("Fiat Punto", auto.Marke);
+            Assert.AreEqual(50, auto.Tagestarif);
         }
 
     }

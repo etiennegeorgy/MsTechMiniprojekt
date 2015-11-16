@@ -13,7 +13,7 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public Auto GetAuto(int id)
+        public Auto GetAutoById(int id)
         {
             using (var context = new AutoReservationEntities())
             {
