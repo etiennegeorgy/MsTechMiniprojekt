@@ -43,5 +43,15 @@ namespace AutoReservation.BusinessLayer.Testing
         {
             Assert.Inconclusive("Test not implemented.");
         }
+
+        [TestMethod]
+        public void Test_GetAuto()
+        {
+            AutoReservationBusinessComponent arbc = new AutoReservationBusinessComponent();
+            
+            Assert.AreEqual("Fiat Punto", arbc.GetAuto(1).Marke);
+            //Assert.Inconclusive("Test not implemented.");
+        }
+
     }
 }
