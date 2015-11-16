@@ -80,7 +80,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AutoReservationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Auto">
+        <EntityType Name="Auto" Abstract="true">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -153,7 +153,7 @@
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="LuxusklasseAuto" BaseType="AutoReservationModel.Auto" >
-          <Property Name="Basistarif" Type="String" Nullable="false" ConcurrencyMode="None" />
+          <Property Name="Basistarif" Type="Int32" Nullable="false" ConcurrencyMode="None" />
         </EntityType>
         <EntityType Name="MittelklasseAuto" BaseType="AutoReservationModel.Auto" />
         <EntityType Name="StandardAuto" BaseType="AutoReservationModel.Auto" />
@@ -233,6 +233,20 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="0a6a5b361b014247aaaf07ba283f737c" Name="Diagram1">
+        <EntityTypeShape EntityType="AutoReservationModel.Auto" Width="1.5" PointX="4.375" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoReservationModel.Kunde" Width="1.5" PointX="12.375" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoReservationModel.Reservation" Width="1.5" PointX="8.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoReservationModel.LuxusklasseAuto" Width="1.5" PointX="2.125" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoReservationModel.MittelklasseAuto" Width="1.5" PointX="4.375" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoReservationModel.StandardAuto" Width="1.5" PointX="6.375" PointY="4.125" IsExpanded="true" />
+        <InheritanceConnector EntityType="AutoReservationModel.LuxusklasseAuto" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="AutoReservationModel.MittelklasseAuto" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="AutoReservationModel.StandardAuto" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoReservationModel.FK_Reservation_Auto" ManuallyRouted="false" />
+        <AssociationConnector Association="AutoReservationModel.FK_Reservation_Kunde" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>
