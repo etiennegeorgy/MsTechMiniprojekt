@@ -5,7 +5,7 @@ namespace AutoReservation.BusinessLayer
 {
     public class AutoReservationBusinessComponent
     {
-        public IEnumerable<Auto> GetAutos()
+        public IList<Auto> GetAutos()
         {
             using (var context = new AutoReservationEntities())
             {
@@ -23,6 +23,16 @@ namespace AutoReservation.BusinessLayer
                 return query;
             }
         }
+
+        public void AddAuto(Auto auto)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                context.Autos.Add(auto);
+            }
+        }
+
+
         //private static void HandleDbConcurrencyException<T>(AutoReservationEntities context, T original) where T : class
         //{
         //    var databaseValue = context.Entry(original).GetDatabaseValues();

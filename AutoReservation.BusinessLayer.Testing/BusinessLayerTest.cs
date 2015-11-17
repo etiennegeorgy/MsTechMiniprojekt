@@ -46,12 +46,18 @@ namespace AutoReservation.BusinessLayer.Testing
         }
 
         [TestMethod]
-        public void Test_GetAuto()
+        public void Test_GetAutoById()
         {
-            AutoReservationBusinessComponent arbc = new AutoReservationBusinessComponent();
-            var auto = arbc.GetAutoById(1);
+            var auto = Target.GetAutoById(1);
             Assert.AreEqual("Fiat Punto", auto.Marke);
             Assert.AreEqual(50, auto.Tagestarif);
+        }
+
+        [TestMethod]
+        public void Test_GetAutos()
+        {
+            var autos = Target.GetAutos();
+            Assert.AreEqual(3, autos.Count);
         }
 
     }
