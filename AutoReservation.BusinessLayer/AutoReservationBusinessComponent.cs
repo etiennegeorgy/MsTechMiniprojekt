@@ -6,7 +6,6 @@ namespace AutoReservation.BusinessLayer
 {
     public class AutoReservationBusinessComponent
     {
-        // Autos
         public IList<Auto> GetAutos()
         {
             using (var context = new AutoReservationEntities())
@@ -62,8 +61,60 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
+        public IList<Kunde> GetKunden()
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                return context.Kunden.ToList();
+            }
+        }
 
+        public Kunde GetKundeById(int id)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                var query = (from c in context.Kunden
+                             where c.Id == id
+                             select c).FirstOrDefault();
+                return query;
+            }
+        }
 
+        public void AddKunde(Kunde kunde)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                context.Kunden.Add(kunde);
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdateKunde(Kunde original, Kunde modified)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                context.Kunden.Attach(original);
+                context.Entry(original).CurrentValues.SetValues(modified);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    HandleDbConcurrencyException(context, original);
+                }
+            }
+        }
+
+        public void DeleteKunde(Kunde kunde)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                context.Kunden.Attach(kunde);
+                context.Kunden.Remove(kunde);
+                context.SaveChanges();
+            }
+        }
         private static void HandleDbConcurrencyException<T>(AutoReservationEntities context, T original) where T : class
         {
             var databaseValue = context.Entry(original).GetDatabaseValues();

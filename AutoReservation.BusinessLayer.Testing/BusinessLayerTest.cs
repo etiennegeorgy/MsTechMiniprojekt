@@ -27,14 +27,6 @@ namespace AutoReservation.BusinessLayer.Testing
         {
             TestEnvironmentHelper.InitializeTestData();
         }
-        
-        
-
-        [TestMethod]
-        public void Test_UpdateKunde()
-        {
-            Assert.Inconclusive("Test not implemented.");
-        }
 
         [TestMethod]
         public void Test_UpdateReservation()
@@ -81,5 +73,43 @@ namespace AutoReservation.BusinessLayer.Testing
             Assert.IsNull(Target.GetAutoById(1));
         }
 
+        [TestMethod]
+        public void Test_GetKunden()
+        {
+            Assert.AreEqual(4, Target.GetKunden().Count);
+        }
+
+        [TestMethod]
+        public void Test_GetKundeById()
+        {
+            Assert.AreEqual("Anna", Target.GetKundeById(1).Vorname);
+            Assert.AreEqual("Nass", Target.GetKundeById(1).Nachname);
+        }
+
+        [TestMethod]
+        public void Test_AddKunde()
+        {
+            Assert.Inconclusive("Test not implemented.");
+        }
+
+        [TestMethod]
+        public void Test_UpdateKunde()
+        {
+            Kunde modifiedKunde = Target.GetKundeById(1);
+            modifiedKunde.Vorname = "Franz";
+            modifiedKunde.Nachname = "Hohl";
+
+            Target.UpdateKunde(Target.GetKundeById(1), modifiedKunde);
+            Assert.AreEqual("Franz", Target.GetKundeById(1).Vorname);
+            Assert.AreEqual("Hohl", Target.GetKundeById(1).Nachname);
+        }
+
+        [TestMethod]
+        public void Test_DeleteKunde()
+        {
+            Assert.IsNotNull(Target.GetKundeById(1));
+            Target.DeleteKunde(Target.GetKundeById(1));
+            Assert.IsNull(Target.GetKundeById(1));
+        }
     }
 }
