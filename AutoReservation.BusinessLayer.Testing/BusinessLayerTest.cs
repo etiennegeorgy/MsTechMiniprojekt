@@ -1,4 +1,5 @@
-﻿using AutoReservation.TestEnvironment;
+﻿using AutoReservation.Dal;
+using AutoReservation.TestEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -27,11 +28,7 @@ namespace AutoReservation.BusinessLayer.Testing
             TestEnvironmentHelper.InitializeTestData();
         }
         
-        [TestMethod]
-        public void Test_UpdateAuto()
-        {
-            Assert.Inconclusive("Test not implemented.");
-        }
+        
 
         [TestMethod]
         public void Test_UpdateKunde()
@@ -48,16 +45,40 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void Test_GetAutoById()
         {
-            var auto = Target.GetAutoById(1);
-            Assert.AreEqual("Fiat Punto", auto.Marke);
-            Assert.AreEqual(50, auto.Tagestarif);
+            Assert.AreEqual("Fiat Punto", Target.GetAutoById(1).Marke);
+            Assert.AreEqual(50, Target.GetAutoById(1).Tagestarif);
         }
 
         [TestMethod]
         public void Test_GetAutos()
         {
-            var autos = Target.GetAutos();
-            Assert.AreEqual(3, autos.Count);
+            Assert.AreEqual(3, Target.GetAutos().Count);
+        }
+
+        [TestMethod]
+        public void Test_AddAuto()
+        {
+            Assert.Inconclusive("Test not implemented.");
+        }
+
+        [TestMethod]
+        public void Test_UpdateAuto()
+        {
+            Auto modifiedAuto = Target.GetAutoById(1);
+            modifiedAuto.Marke = "Nissan";
+            modifiedAuto.Tagestarif = 80;
+
+            Target.UpdateAuto(Target.GetAutoById(1), modifiedAuto);
+            Assert.AreEqual("Nissan", Target.GetAutoById(1).Marke);
+            Assert.AreEqual(80, Target.GetAutoById(1).Tagestarif);
+        }
+
+        [TestMethod]
+        public void Test_DeleteAuto()
+        {
+            Assert.IsNotNull(Target.GetAutoById(1));
+            Target.DeleteAuto(Target.GetAutoById(1));
+            Assert.IsNull(Target.GetAutoById(1));
         }
 
     }
