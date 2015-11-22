@@ -115,6 +115,63 @@ namespace AutoReservation.BusinessLayer
                 context.SaveChanges();
             }
         }
+
+        public IList<Reservation> GetReservations()
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                return context.Reservationen.ToList();
+            }
+        }
+
+        public Reservation GetReservationById(int id)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                var query = (from c in context.Reservationen
+                             where c.ReservationNr == id
+                             select c).FirstOrDefault();
+                return query;
+            }
+        }
+
+        public void AddReservation(Reservation reservation)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                context.Reservationen.Add(reservation);
+                context.SaveChanges();
+            }
+        }
+        public void DeleteReservation(Reservation reservation)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                context.Reservationen.Attach(reservation);
+                context.Reservationen.Remove(reservation);
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdateReservation(Reservation original, Reservation modified)
+        {
+            using (var context = new AutoReservationEntities())
+            {
+                context.Reservationen.Attach(original);
+                context.Entry(original).CurrentValues.SetValues(modified);
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    HandleDbConcurrencyException(context, original);
+                }
+            }
+        }
+
+
+
         private static void HandleDbConcurrencyException<T>(AutoReservationEntities context, T original) where T : class
         {
             var databaseValue = context.Entry(original).GetDatabaseValues();
