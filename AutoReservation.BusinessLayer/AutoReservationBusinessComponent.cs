@@ -6,7 +6,7 @@ namespace AutoReservation.BusinessLayer
 {
     public class AutoReservationBusinessComponent
     {
-        public IList<Auto> GetAutos()
+        public IEnumerable<Auto> GetAutos()
         {
             using (var context = new AutoReservationEntities())
             {
@@ -61,7 +61,7 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public IList<Kunde> GetKunden()
+        public IEnumerable<Kunde> GetKunden()
         {
             using (var context = new AutoReservationEntities())
             {
@@ -116,7 +116,7 @@ namespace AutoReservation.BusinessLayer
             }
         }
 
-        public IList<Reservation> GetReservations()
+        public IEnumerable<Reservation> GetReservations()
         {
             using (var context = new AutoReservationEntities())
             {

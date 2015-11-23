@@ -2,6 +2,7 @@
 using AutoReservation.TestEnvironment;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace AutoReservation.BusinessLayer.Testing
 {
@@ -39,7 +40,7 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void Test_GetAutos()
         {
-            Assert.AreEqual(3, Target.GetAutos().Count);
+            Assert.AreEqual(3, Target.GetAutos().Count());
         }
 
         [TestMethod]
@@ -71,7 +72,7 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void Test_GetKunden()
         {
-            Assert.AreEqual(4, Target.GetKunden().Count);
+            Assert.AreEqual(4, Target.GetKunden().Count());
         }
 
         [TestMethod]
@@ -110,7 +111,7 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void Test_GetReservations()
         {
-            Assert.AreEqual(3, Target.GetReservations().Count);
+            Assert.AreEqual(3, Target.GetReservations().Count());
         }
 
         [TestMethod]
