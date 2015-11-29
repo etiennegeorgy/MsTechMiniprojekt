@@ -1,40 +1,45 @@
 ﻿using AutoReservation.BusinessLayer;
 using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace AutoReservation.Service.Wcf
 {
-    public class AutoReservationService
+    public class AutoReservationService : IAutoReservationService
     {
         private AutoReservationBusinessComponent businessComponent = new AutoReservationBusinessComponent();
 
         #region Auto
 
-        private IEnumerable<AutoDto> GetAutos()
+        public IEnumerable<AutoDto> GetAutos()
         {
             WriteActualMethod();
             return businessComponent.GetAutos().ConvertToDtos();
         }
 
-        private AutoDto GetAutoById(int id)
+        public AutoDto GetAutoById(int id)
         {
+            WriteActualMethod();
             return businessComponent.GetAutoById(id).ConvertToDto();
         }
 
-        private void AddAuto(AutoDto auto)
+        public void AddAuto(AutoDto auto)
         {
+            WriteActualMethod();
             businessComponent.AddAuto(auto.ConvertToEntity());
         }
 
-        private void UpdateAuto(AutoDto original, AutoDto modified)
+        public void UpdateAuto(AutoDto original, AutoDto modified)
         {
+            WriteActualMethod();
             businessComponent.UpdateAuto(original.ConvertToEntity(), modified.ConvertToEntity());
         }
 
-        private void DeleteAuto(AutoDto auto)
+        public void DeleteAuto(AutoDto auto)
         {
+            WriteActualMethod();
             businessComponent.DeleteAuto(auto.ConvertToEntity());
         }
 
@@ -42,28 +47,33 @@ namespace AutoReservation.Service.Wcf
 
         #region Kunde
 
-        private IEnumerable<KundeDto> GetKunden()
+        public IEnumerable<KundeDto> GetKunden()
         {
+            WriteActualMethod();
             return businessComponent.GetKunden().ConvertToDtos();
         }
 
-        private KundeDto GetKundeById(int id)
+        public KundeDto GetKundeById(int id)
         {
+            WriteActualMethod();
             return businessComponent.GetKundeById(id).ConvertToDto();
         }
 
-        private void AddKunde(KundeDto kunde)
+        public void AddKunde(KundeDto kunde)
         {
+            WriteActualMethod();
             businessComponent.AddKunde(kunde.ConvertToEntity());
         }
 
-        private void UpdateKunde(KundeDto original, KundeDto modified)
+        public void UpdateKunde(KundeDto original, KundeDto modified)
         {
+            WriteActualMethod();
             businessComponent.UpdateKunde(original.ConvertToEntity(), modified.ConvertToEntity());
         }
 
-        private void DeleteKunde(KundeDto kunde)
+        public void DeleteKunde(KundeDto kunde)
         {
+            WriteActualMethod();
             businessComponent.DeleteKunde(kunde.ConvertToEntity());
         }
 
@@ -71,28 +81,33 @@ namespace AutoReservation.Service.Wcf
 
         #region Reservation
 
-        private IEnumerable<ReservationDto> GetReservations()
+        public IEnumerable<ReservationDto> GetReservations()
         {
+            WriteActualMethod();
             return businessComponent.GetReservations().ConvertToDtos();
         }
 
-        private ReservationDto GetReservationById(int id)
+        public ReservationDto GetReservationById(int id)
         {
+            WriteActualMethod();
             return businessComponent.GetReservationById(id).ConvertToDto();
         }
 
-        private void AddReservation(ReservationDto reservation)
+        public void AddReservation(ReservationDto reservation)
         {
+            WriteActualMethod();
             businessComponent.AddReservation(reservation.ConvertToEntity());
         }
 
-        private void UpdateReservation(ReservationDto original, ReservationDto modified)
+        public void UpdateReservation(ReservationDto original, ReservationDto modified)
         {
+            WriteActualMethod();
             businessComponent.UpdateReservation(original.ConvertToEntity(), modified.ConvertToEntity());
         }
 
-        private void DeleteReservation(ReservationDto reservation)
+        public void DeleteReservation(ReservationDto reservation)
         {
+            WriteActualMethod();
             businessComponent.DeleteReservation(reservation.ConvertToEntity());
         }
         
