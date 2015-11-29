@@ -22,7 +22,8 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void Test_GetAutos()
         {
-            Assert.Inconclusive("Test not implemented.");
+            IEnumerable<AutoDto> autos = Target.GetAutos();
+            // Assert.AreEqual(3, );
         }
 
         [TestMethod]
@@ -40,7 +41,10 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void Test_GetAutoById()
         {
-            Assert.Inconclusive("Test not implemented.");
+            AutoDto auto = Target.GetAutoById(1);
+            Assert.AreEqual("Fiat Punto", auto.Marke);
+            Assert.AreEqual(50, auto.Tagestarif);
+
         }
 
         [TestMethod]
