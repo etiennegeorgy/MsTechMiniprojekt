@@ -14,6 +14,7 @@ namespace AutoReservation.Service.Wcf
 
         private IEnumerable<AutoDto> GetAutos()
         {
+            WriteActualMethod();
             return businessComponent.GetAutos().ConvertToDtos();
         }
 
