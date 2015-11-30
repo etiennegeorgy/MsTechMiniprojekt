@@ -4,8 +4,6 @@
         to="AutoReservation.Ui.Factory.NullServiceFactory, AutoReservation.Ui"
         scope="singleton"/>
 
-
-  
   <!-- ALL NINJECT MAPPINGS -->
   
   <!-- Injection of NullObject as long as no concrete factory exists -->
@@ -13,7 +11,7 @@
         to="AutoReservation.Ui.Factory.NullServiceFactory, AutoReservation.Ui"
         scope="singleton"/>-->
   <!-- Injection used when the service is run locally -->
-  <!--<bind service="AutoReservation.Ui.Factory.IServiceFactory, AutoReservation.Ui"
+  <!-- <bind service="AutoReservation.Ui.Factory.IServiceFactory, AutoReservation.Ui"
         to="AutoReservation.Ui.Factory.LocalDataAccessServiceFactory, AutoReservation.Ui"
         scope="singleton"/>-->
   <!-- Injection used when the service is somewhere else (using WCF) -->
