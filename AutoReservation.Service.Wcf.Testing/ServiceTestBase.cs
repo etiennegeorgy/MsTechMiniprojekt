@@ -23,20 +23,19 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void Test_GetAutos()
         {
-            IEnumerable<AutoDto> autos = Target.GetAutos();
-            Assert.AreEqual(3,autos.Count());
+            Assert.AreEqual(3,Target.GetAutos().Count());
         }
 
         [TestMethod]
         public void Test_GetKunden()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.AreEqual(4, Target.GetKunden().Count());
         }
 
         [TestMethod]
         public void Test_GetReservationen()
         {
-            Assert.Inconclusive("Test not implemented.");
+            Assert.AreEqual(3, Target.GetReservations().Count());
         }
 
         [TestMethod]
