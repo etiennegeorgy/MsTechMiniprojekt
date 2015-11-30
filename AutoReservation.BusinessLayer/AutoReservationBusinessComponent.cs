@@ -120,7 +120,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (var context = new AutoReservationEntities())
             {
-                return context.Reservationen.ToList();
+                return context.Reservationen.Include("Auto").Include("Kunde").ToList();
             }
         }
 
@@ -128,7 +128,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (var context = new AutoReservationEntities())
             {
-                var query = (from c in context.Reservationen
+                var query = (from c in context.Reservationen.Include("Auto").Include("Kunde")
                              where c.ReservationNr == id
                              select c).FirstOrDefault();
                 return query;
