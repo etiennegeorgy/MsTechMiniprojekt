@@ -171,27 +171,52 @@ namespace AutoReservation.Service.Wcf.Testing
         [ExpectedException(typeof(FaultException<AutoDto>))]
         public void Test_UpdateAutoWithOptimisticConcurrency()
         {
-            /* AutoDto modifiedAuto = Target.GetAutoById(1);
-            modifiedAuto.Marke = "Nissan";
-            modifiedAuto.Tagestarif = 80;
+            AutoDto sourceAutoFirst = Target.GetAutoById(1);
+            AutoDto modifiedAutoFirst = Target.GetAutoById(1);
+            modifiedAutoFirst.Marke = "Nissan";
 
-            Target.UpdateAuto(Target.GetAutoById(1), modifiedAuto);
-            Assert.AreEqual("Nissan", Target.GetAutoById(1).Marke);
-            Assert.AreEqual(80, Target.GetAutoById(1).Tagestarif); */
+            AutoDto sourceAutoSecond = Target.GetAutoById(1);
+            AutoDto modifiedAutoSecond = Target.GetAutoById(1);
+            modifiedAutoSecond.Marke = "Subaru";
+
+            Target.UpdateAuto(sourceAutoFirst, modifiedAutoFirst);
+            Target.UpdateAuto(sourceAutoSecond, modifiedAutoSecond);
+
         }
 
         [TestMethod]
         [ExpectedException(typeof(FaultException<KundeDto>))]
         public void Test_UpdateKundeWithOptimisticConcurrency()
         {
-            Assert.Inconclusive("Test not implemented.");
+            KundeDto sourceKundeFirst = Target.GetKundeById(1);
+            KundeDto modifiedKundeFirst = Target.GetKundeById(1);
+            modifiedKundeFirst.Vorname = "Vujo";
+
+            KundeDto sourceKundeSecond = Target.GetKundeById(1);
+            KundeDto modifiedKundeSecond = Target.GetKundeById(1);
+            modifiedKundeSecond.Vorname = "Jeff";
+
+            Target.UpdateKunde(sourceKundeFirst, modifiedKundeFirst);
+            Target.UpdateKunde(sourceKundeSecond, modifiedKundeSecond);
         }
 
         [TestMethod]
         [ExpectedException(typeof(FaultException<ReservationDto>))]
         public void Test_UpdateReservationWithOptimisticConcurrency()
         {
-            Assert.Inconclusive("Test not implemented.");
+            DateTime von = new DateTime(2020, 1, 21, 00, 00, 00);
+            DateTime bis = new DateTime(2020, 1, 25, 00, 00, 00);
+
+            ReservationDto sourceReservationFirst = Target.GetReservationById(1);
+            ReservationDto modifiedReservationFirst = Target.GetReservationById(1);
+            modifiedReservationFirst.Bis = new DateTime(2020, 1, 26, 00, 00, 00);
+
+            ReservationDto sourceKundeSecond = Target.GetReservationById(1);
+            ReservationDto modifiedKundeSecond = Target.GetReservationById(1);
+            modifiedKundeSecond.Bis = new DateTime(2020, 1, 28, 00, 00, 00);
+
+            Target.UpdateReservation(sourceReservationFirst, modifiedReservationFirst);
+            Target.UpdateReservation(sourceKundeSecond, modifiedKundeSecond);
         }
 
         [TestMethod]
