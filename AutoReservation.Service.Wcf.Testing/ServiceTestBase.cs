@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Linq;
 
 namespace AutoReservation.Service.Wcf.Testing
 {
@@ -23,7 +24,7 @@ namespace AutoReservation.Service.Wcf.Testing
         public void Test_GetAutos()
         {
             IEnumerable<AutoDto> autos = Target.GetAutos();
-            // Assert.AreEqual(3, );
+            Assert.AreEqual(3,autos.Count());
         }
 
         [TestMethod]
