@@ -113,23 +113,29 @@ namespace AutoReservation.Service.Wcf.Testing
         {
             DateTime von = new DateTime(2020, 1, 21, 00, 00, 00);
             DateTime bis = new DateTime(2020, 1, 25, 00, 00, 00);
-
             ReservationDto reservation = new ReservationDto();
+            AutoDto auto = new AutoDto();
+            KundeDto kunde = new KundeDto();
+            
+            reservation.Auto = auto;
             reservation.Auto.Id = 1;
+            reservation.Kunde = kunde;
             reservation.Kunde.Id = 2;
             reservation.Von = von;
             reservation.Bis = bis;
 
-            Assert.IsNull(Target.GetReservationById(4));
+            ReservationDto beforeAdd = Target.GetReservationById(4);
+            Assert.IsNull(beforeAdd);
+
             Target.AddReservation(reservation);
-            Assert.IsNotNull(Target.GetReservationById(4));
 
-            ReservationDto getreservation = Target.GetReservationById(4);
+            ReservationDto afterAdd = Target.GetReservationById(4);
+            Assert.IsNotNull(afterAdd);
 
-            Assert.AreEqual(von, getreservation.Von);
-            Assert.AreEqual(bis, getreservation.Bis);
-            Assert.AreEqual(2, getreservation.Kunde.Id);
-            Assert.AreEqual(1, getreservation.Auto.Id);
+            Assert.AreEqual(von, afterAdd.Von);
+            Assert.AreEqual(bis, afterAdd.Bis);
+            Assert.AreEqual(2, afterAdd.Kunde.Id);
+            Assert.AreEqual(1, afterAdd.Auto.Id);
         }
 
         [TestMethod]

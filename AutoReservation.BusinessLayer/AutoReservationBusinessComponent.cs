@@ -11,7 +11,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (var context = new AutoReservationEntities())
             {
-                return context.Autos.ToList();
+                return context.Autos.Include(c => c.Reservations).ToList();
             }
         }
 
@@ -19,7 +19,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (var context = new AutoReservationEntities())
             {
-                var query = (from c in context.Autos
+                var query = (from c in context.Autos.Include(c => c.Reservations)
                             where c.Id == id
                             select c).FirstOrDefault();
                 return query;
