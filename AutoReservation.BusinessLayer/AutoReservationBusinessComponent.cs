@@ -2,6 +2,7 @@
 using AutoReservation.Dal;
 using System.Linq;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 namespace AutoReservation.BusinessLayer
 {
     public class AutoReservationBusinessComponent
@@ -65,7 +66,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (var context = new AutoReservationEntities())
             {
-                return context.Kunden.ToList();
+                return context.Kunden.Include(c => c.Reservations).ToList();
             }
         }
 
@@ -73,7 +74,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (var context = new AutoReservationEntities())
             {
-                var query = (from c in context.Kunden
+                var query = (from c in context.Kunden.Include(c => c.Reservations)
                              where c.Id == id
                              select c).FirstOrDefault();
                 return query;
@@ -120,7 +121,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (var context = new AutoReservationEntities())
             {
-                return context.Reservationen.Include("Auto").Include("Kunde").ToList();
+                return context.Reservationen.Include(c => c.Kunde).Include(c => c.Auto).ToList();
             }
         }
 
@@ -128,7 +129,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (var context = new AutoReservationEntities())
             {
-                var query = (from c in context.Reservationen.Include("Auto").Include("Kunde")
+                var query = (from c in context.Reservationen.Include(c => c.Kunde).Include(c => c.Auto)
                              where c.ReservationNr == id
                              select c).FirstOrDefault();
                 return query;
