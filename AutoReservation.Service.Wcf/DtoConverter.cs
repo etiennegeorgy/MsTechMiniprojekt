@@ -62,6 +62,7 @@ namespace AutoReservation.Service.Wcf
             return ConvertGenericList(autos, ConvertToDto);
         }
         #endregion
+
         #region Kunde
         public static Kunde ConvertToEntity(this KundeDto dto)
         {
@@ -96,6 +97,7 @@ namespace AutoReservation.Service.Wcf
             return ConvertGenericList(kunden, ConvertToDto);
         }
         #endregion
+
         #region Reservation
         public static Reservation ConvertToEntity(this ReservationDto dto)
         {

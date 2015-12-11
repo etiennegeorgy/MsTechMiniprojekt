@@ -61,8 +61,9 @@ namespace AutoReservation.Service.Wcf.Testing
             DateTime von = new DateTime(2020, 1, 10, 00, 00, 00);
             DateTime bis = new DateTime(2020, 1, 20, 00, 00, 00);
 
-            Assert.AreEqual(von, Target.GetReservationById(1).Von);
-            Assert.AreEqual(bis, Target.GetReservationById(1).Bis);
+            ReservationDto reservation = Target.GetReservationById(1);
+            Assert.AreEqual(von, reservation.Von);
+            Assert.AreEqual(bis, reservation.Bis);
         }
 
         [TestMethod]
@@ -145,9 +146,13 @@ namespace AutoReservation.Service.Wcf.Testing
             modifiedAuto.Marke = "Nissan";
             modifiedAuto.Tagestarif = 80;
 
-            Target.UpdateAuto(Target.GetAutoById(1), modifiedAuto);
-            Assert.AreEqual("Nissan", Target.GetAutoById(1).Marke);
-            Assert.AreEqual(80, Target.GetAutoById(1).Tagestarif);
+            AutoDto originalAuto = Target.GetAutoById(1);
+
+            Target.UpdateAuto(originalAuto, modifiedAuto);
+
+            AutoDto updatedAuto = Target.GetAutoById(1);
+            Assert.AreEqual("Nissan", updatedAuto.Marke);
+            Assert.AreEqual(80, updatedAuto.Tagestarif);
         }
 
         [TestMethod]
@@ -157,9 +162,13 @@ namespace AutoReservation.Service.Wcf.Testing
             modifiedKunde.Vorname = "Franz";
             modifiedKunde.Nachname = "Hohl";
 
-            Target.UpdateKunde(Target.GetKundeById(1), modifiedKunde);
-            Assert.AreEqual("Franz", Target.GetKundeById(1).Vorname);
-            Assert.AreEqual("Hohl", Target.GetKundeById(1).Nachname);
+            KundeDto originalKunde = Target.GetKundeById(1);
+            
+            Target.UpdateKunde(originalKunde, modifiedKunde);
+
+            KundeDto updatedKunde = Target.GetKundeById(1);
+            Assert.AreEqual("Franz", updatedKunde.Vorname);
+            Assert.AreEqual("Hohl", updatedKunde.Nachname);
         }
 
         [TestMethod]
@@ -169,8 +178,13 @@ namespace AutoReservation.Service.Wcf.Testing
             DateTime bis = new DateTime(2020, 1, 25, 00, 00, 00);
             modifiedReservation.Bis = bis;
 
+            ReservationDto originalReservation = Target.GetReservationById(1);
+
             Target.UpdateReservation(Target.GetReservationById(1), modifiedReservation);
-            Assert.AreEqual(bis, Target.GetReservationById(1).Bis);
+
+            ReservationDto updatedReservation = Target.GetReservationById(1);
+
+            Assert.AreEqual(bis, updatedReservation.Bis);
         }
 
         [TestMethod]
@@ -228,24 +242,27 @@ namespace AutoReservation.Service.Wcf.Testing
         [TestMethod]
         public void Test_DeleteKunde()
         {
-            Assert.IsNotNull(Target.GetKundeById(1));
-            Target.DeleteKunde(Target.GetKundeById(1));
+            KundeDto kunde = Target.GetKundeById(1);
+            Assert.IsNotNull(kunde);
+            Target.DeleteKunde(kunde);
             Assert.IsNull(Target.GetKundeById(1));
         }
 
         [TestMethod]
         public void Test_DeleteAuto()
         {
-            Assert.IsNotNull(Target.GetAutoById(1));
-            Target.DeleteAuto(Target.GetAutoById(1));
+            AutoDto auto = Target.GetAutoById(1);
+            Assert.IsNotNull(auto);
+            Target.DeleteAuto(auto);
             Assert.IsNull(Target.GetAutoById(1));
         }
 
         [TestMethod]
         public void Test_DeleteReservation()
         {
-            Assert.IsNotNull(Target.GetReservationById(1));
-            Target.DeleteReservation(Target.GetReservationById(1));
+            ReservationDto reservation = Target.GetReservationById(1);
+            Assert.IsNotNull(reservation);
+            Target.DeleteReservation(reservation);
             Assert.IsNull(Target.GetReservationById(1));
         }
     }
